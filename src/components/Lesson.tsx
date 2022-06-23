@@ -1,7 +1,8 @@
+import { memo, useMemo } from 'react'
 import { format, isPast } from 'date-fns'
+import { Link } from 'react-router-dom'
 import ptBR from 'date-fns/locale/pt-BR'
 import { CheckCircle, Lock } from 'phosphor-react'
-import { memo, useMemo } from 'react'
 
 enum LESSON_TYPE {
   live = 'AO VIVO',
@@ -29,12 +30,12 @@ function LessonComponent(props: LessonProps) {
   }, [props.availableAt])
 
   return (
-    <a href={`/${props.slug}`}>
+    <Link to={`/event/lesson/${props.slug}`} className="group">
       <span className="text-gray-300">
         {lessonInfo.availableDateFormatted}
       </span>
 
-      <div className="rounded border border-gray-500 p-4 mt-2">
+      <div className="rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500 transition-colors">
         <header className="flex items-center justify-between">
           {lessonInfo.isLessonAvailable ? (
             <span className="text-sm text-blue-500 font-medium flex items-center gap-2">
@@ -57,7 +58,7 @@ function LessonComponent(props: LessonProps) {
           {props.title}
         </strong>
       </div>
-    </a>
+    </Link>
   )
 }
 
